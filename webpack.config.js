@@ -1,6 +1,7 @@
 var path = require('path');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var OpenBrowserPlugin = require('open-browser-webpack-plugin');
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
     entry: './src/index.js',
@@ -16,6 +17,7 @@ module.exports = {
     plugins: [
         new HtmlWebpackPlugin(),
         new OpenBrowserPlugin({ url: 'http://localhost:9000' }),
+        new UglifyJSPlugin()
         ],
     module: {
         rules: [
@@ -40,6 +42,9 @@ module.exports = {
                 exclude: /(node_modules|bower_components)/,
                 use: {
                     loader: 'babel-loader',
+                    query: {
+                        presets: ["es2015"]
+                    }
                 }
             },
 
